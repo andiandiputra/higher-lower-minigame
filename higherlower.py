@@ -41,20 +41,24 @@ def comparison(a, b, c):
         return True
     elif c == "b" and answer_b:
         return True
-    else:
+    else :
         return False
+    
+    
 
 def play_game(data):
+    clear()
     scores = 0
     data1, data2 = get_data(data)
     used_data(data1, data2)
     print(logo)
-
     while True:
-        
         display_comparison(data1, data2)
-        answer = input('Which side has more follower? A or B :').lower()
-
+        while True:
+            answer = input('Which side has more follower? A or B : (type exit to quit game)').lower()
+            if answer in ['a', 'b', 'exit']:
+                break
+            print("Invalid input. Please enter 'a', 'b', or 'exit'.")
         if answer == 'exit':
             break
         if comparison(data1, data2, answer):
@@ -66,12 +70,9 @@ def play_game(data):
             elif answer == "b":
                 data1 = data2
                 data2 = get_new_data(data, data1)
-            
-
         else:
             print(f"\nYou lose, your last score is {scores} ")
             print(f"The answers were : \nA has {data1['follower_count']} followers \nB has {data2['follower_count']} followers")
-
             break
 
 play_game(data.data)
